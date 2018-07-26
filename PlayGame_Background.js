@@ -1,7 +1,6 @@
 function PGBackGround()
 {
     this.imgBackgroundBlue = resourcePreLoader.GetImage("img/game_background_blue.png");
-    this.imgBackgroundCloud = resourcePreLoader.GetImage("img/game_background_cloud.png");    
     this.posCloud = 0;
     this.speedCloud = 0.5;
 }
@@ -28,8 +27,5 @@ PGBackGround.prototype.RenderLayerBack = function()
     var Context = theCanvas.getContext("2d");
     
     Context.drawImage(this.imgBackgroundBlue, 0, 0);
-    for(var i = 0; i < 2; i++)  //i는 그려주고 싶은 개수
-    {
-        Context.drawImage(this.imgBackgroundCloud, this.posCloud + 800 * i, 30);
-    }
+
 };

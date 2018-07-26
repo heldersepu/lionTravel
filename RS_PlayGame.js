@@ -4,8 +4,8 @@ function PlayGameState()
     this.background = new PGBackGround();
     
     //컨트롤러
-    this.imgCtrlLeft = resourcePreLoader.GetImage("img/game_ctrl_left.png");
-    this.imgCtrlRight = resourcePreLoader.GetImage("img/game_ctrl_right.png");
+    //this.imgCtrlLeft = resourcePreLoader.GetImage("img/game_ctrl_left.png");
+    //this.imgCtrlRight = resourcePreLoader.GetImage("img/game_ctrl_right.png");
     // this.imgCtrlDash = resourcePreLoader.GetImage("/.c9/img/game_ctrl_dash.png");
     
     //타이머
@@ -13,29 +13,25 @@ function PlayGameState()
     
     //플레이어
     this.sprPlayer = new SpriteAnimation(resourcePreLoader.GetImage("img/game_player.png"), 125, 167, 4, 4);
-    this.x = 200;
-    this.y = 200;
+    this.x = this.y = 200;
     
     this.Invalid();
     
-    this.isJumpingUp = false;
-    this.jumpPower = 0;
-    this.dashPower = 0;
+    this.isJumpingUp = true;
+    this.jumpPower = this.dashPower = -15;
     
     //로그
-    this.imgShortlog1 = resourcePreLoader.GetImage("img/game_shortlog.png");
-    this.imgShortlog2 = resourcePreLoader.GetImage("img/game_shortlog.png");
-    this.imgShortlog3 = resourcePreLoader.GetImage("img/game_shortlog.png");
+    this.imgShortlog = resourcePreLoader.GetImage("img/game_shortlog.png");
     
     //로그 이동
     this.posShortlog1 = 0+200;
-    this.speedShortlog1 = 7;
+    this.speedShortlog1 = 2;
     
     this.posShortlog2 = 315+200;
-    this.speedShortlog2 = 7;
+    this.speedShortlog2 = 2;
     
     this.posShortlog3 = 625+200;
-    this.speedShortlog3 = 7;
+    this.speedShortlog3 = 2;
     
     //초기 로그 y위치 생성
     this.y_log_position_Arr = new Array(3);
@@ -70,18 +66,28 @@ PlayGameState.prototype.Render = function()
     this.background.RenderLayerBack();
     
     //컨트롤러 그리기
-    Context.drawImage(this.imgCtrlLeft, 0, 430, 180, 180);
-    Context.drawImage(this.imgCtrlRight, 620, 430, 180, 180);
+    //Context.drawImage(this.imgCtrlLeft, 0, 430, 180, 180);
+    //Context.drawImage(this.imgCtrlRight, 620, 430, 180, 180);
     // Context.drawImage(this.imgCtrlDash, 200, 430, 180, 180);
 
     //로그 그리기
-    Context.drawImage(this.imgShortlog1, this.posShortlog1, this.y_log_position_Arr[0], 170, 32);
-    Context.drawImage(this.imgShortlog2, this.posShortlog2, this.y_log_position_Arr[1], 170, 32);
-    Context.drawImage(this.imgShortlog3, this.posShortlog3, this.y_log_position_Arr[2], 170, 32);
+    Context.drawImage(this.imgShortlog, this.posShortlog1, this.y_log_position_Arr[0], 170, 32);
+    Context.drawImage(this.imgShortlog, this.posShortlog2, this.y_log_position_Arr[1], 170, 32);
+    Context.drawImage(this.imgShortlog, this.posShortlog3, this.y_log_position_Arr[2], 170, 32);
+    
+    drawDebug(Context, this.posShortlog1, this.y_log_position_Arr[0]);
+    drawDebug(Context, this.posShortlog2, this.y_log_position_Arr[1]);
+    drawDebug(Context, this.posShortlog3, this.y_log_position_Arr[2]);
+    
     
     //플레이어 그리기
     this.sprPlayer.Render(Context);
 };
+
+function drawDebug(c, x, y) {
+    c.fillText(x, x + 50, y);
+    c.fillText(y, x + 80, y);     
+}
 
 PlayGameState.prototype.Update = function()
 {
@@ -148,28 +154,28 @@ PlayGameState.prototype.Update = function()
     //     this.Invalid();
     // }
     
-    if(this.isJumpingUp == false)
-    {
-        if(inputSystem.isKeyDown(37))
-        {
-            this.isJumpingUp = true;
-            this.jumpPower = -17;
-        }
-        
-        if(inputSystem.isKeyDown(39))
-        {
-            this.isJumpingUp = true;
-            this.jumpPower = -15;
-        }
-        
-        if(inputSystem.isKeyDown(38))
-        {
-            this.isJumpingUp = true;
-            this.jumpPower = -15;
-        }
-    }
-    else
-    {
+    // if(this.isJumpingUp == false)
+    // {
+    //     if(inputSystem.isKeyDown(37))
+    //     {
+    //         this.isJumpingUp = true;
+    //         this.jumpPower = -17;
+    //     }
+    //     
+    //     if(inputSystem.isKeyDown(39))
+    //     {
+    //         this.isJumpingUp = true;
+    //         this.jumpPower = -15;
+    //     }
+    //     
+    //     if(inputSystem.isKeyDown(38))
+    //     {
+    //         this.isJumpingUp = true;
+    //         this.jumpPower = -15;
+    //     }
+    // }
+    // else
+    // {
         this.y += this.jumpPower;
         this.jumpPower += 1;
         
@@ -177,10 +183,11 @@ PlayGameState.prototype.Update = function()
         {
             this.y = this.afterjump_Arr[1]-150;
             
-            this.isJumpingUp = false;
+            //this.isJumpingUp = false;
+            this.jumpPower = -15;
         }
         this.Invalid();
-    }
+    // }
     
 };
 

@@ -19,7 +19,7 @@ function onGameInit()
     resourcePreLoader.AddImage("img/game_shortlog.png");
     resourcePreLoader.AddImage("img/game_player.png");
     
-    soundSystem.AddSound("background.mp3", 1);
+    //soundSystem.AddSound("background.mp3", 1);
     
     //게임 초기 시작 상태 결정
     after_loading_state = new TitleState();

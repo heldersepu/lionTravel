@@ -37,14 +37,14 @@ SpriteAnimation.prototype.Update = function(context)
     
     // this.animationTimer.Update();
     
-    if(this.animationTimer.nowFrame > 1000 / this.fps)
-    {
-        this.currentFrame++;
-        if(this.currentFrame >= this.totalFrameCount)
-            this.currentFrame = 0;
-        
-        this.animationTimer.Reset();
-    }
+    // if(this.animationTimer.nowFrame > 1000 / this.fps)
+    // {
+    //     this.currentFrame++;
+    //     if(this.currentFrame >= this.totalFrameCount)
+    //         this.currentFrame = 0;
+    //     
+    //     this.animationTimer.Reset();
+    // }
 };
 
 SpriteAnimation.prototype.Translate = function(x, y)
