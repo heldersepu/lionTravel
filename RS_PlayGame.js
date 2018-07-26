@@ -79,6 +79,7 @@ PlayGameState.prototype.Render = function()
     drawDebug(Context, this.posShortlog2, this.y_log_position_Arr[1]);
     drawDebug(Context, this.posShortlog3, this.y_log_position_Arr[2]);
     
+    Context.fillText("afterjump: " + this.afterjump_Arr[1], 10, 40);
     
     //플레이어 그리기
     this.sprPlayer.Render(Context);
